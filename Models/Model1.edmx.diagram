@@ -45,6 +45,18 @@
         <AssociationConnector Association="Database1Model.FK_Table_UsersPermisions" />
         <EntityTypeShape EntityType="Database1Model.Reports_Permissions" Width="1.5" PointX="5" PointY="19.875" />
         <AssociationConnector Association="Database1Model.FK_Reports_Permissions_U" />
+        <EntityTypeShape EntityType="Database1Model.Expense_Reports_Permissions" Width="1.5" PointX="5" PointY="25.875" />
+        <EntityTypeShape EntityType="Database1Model.Main_Reports_Permissions" Width="1.5" PointX="5" PointY="28.625" />
+        <EntityTypeShape EntityType="Database1Model.Production_Reports_Permissions" Width="1.5" PointX="5" PointY="23.25" />
+        <EntityTypeShape EntityType="Database1Model.Purchase_Reports_Permissions" Width="1.5" PointX="5" PointY="31.375" />
+        <EntityTypeShape EntityType="Database1Model.Sale_Reports_Permissions" Width="1.5" PointX="5" PointY="34.125" />
+        <AssociationConnector Association="Database1Model.FK_Expense_Reports_Permissions_U" />
+        <AssociationConnector Association="Database1Model.FK_Main_Reports_Permissions_U" />
+        <AssociationConnector Association="Database1Model.FK_production_Reports_Permissions_U" />
+        <AssociationConnector Association="Database1Model.FK_purchase_Reports_Permissions_U" />
+        <AssociationConnector Association="Database1Model.FK_sale_Reports_Permissions_U" />
+        <EntityTypeShape EntityType="Database1Model.bankPayment_Reports_Permissions" Width="1.5" PointX="5" PointY="37.875" />
+        <AssociationConnector Association="Database1Model.FK_bankPayment_Reports_Permissions_U" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -139,6 +139,13 @@
                                                 <a href="~/User_CRUD/viewUsers/">View Users</a>
                                             </li>
                                         }
+                                        @if (Model.option_create == "Y")
+                                        {
+
+                                            <li>
+                                                <a href="~/USER_CRUD/ReportsPermissions/@Model.Id">Add Permissions</a>
+                                            </li>
+                                        }
 
                                     </ul>
 
