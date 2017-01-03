@@ -33,6 +33,8 @@
 
 
     int ID = Convert.ToInt32(Session["ID"]);
+
+    int trialBalanceReport = Convert.ToInt32(Session["trialBalance"]);
     
 }
 
@@ -322,10 +324,13 @@
                                 </li>
                             }
                             
-
+                            @if (trialBalanceReport ==1)
+                            {
+                                 
                             <li>
                                 <a href="~/Transactions/TrialBalanceReport/"><i class="fa fa-bar-chart-o"></i> Trial Balance Report</a>
                             </li>
+                            }
                         </ul>
 
                     </li>
@@ -407,6 +412,10 @@
                         </li>
                     }
 
+
+                    <li>
+                        <a href="~/GoodsManagement/viewUnitRates/"> <i class="fa fa-bar-chart-o"></i>View Unit Rates </a>
+                    </li>
 
              
           
