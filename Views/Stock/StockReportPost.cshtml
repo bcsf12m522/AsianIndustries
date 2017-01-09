@@ -113,7 +113,7 @@
                     <div class="row">
                         <div class="x_content">
                             <br />
-                            <form id="demo-form2" action="@Url.Action("StockReportPost","Stock")" method="post" data-parsley-validate class="form-horizontal form-label-left">
+                            <form id="demo-form2" action="@Url.Action("StockReportPost","Stock")" method="get" data-parsley-validate class="form-horizontal form-label-left">
 
                                 <div class="form-group">
 
@@ -186,7 +186,7 @@
                                                     debCommas = (String.Format("{0:0,0}", t.dr));
                                                     crCommas = (String.Format("{0:0,0}", t.cr));
 
-                                                    if (t.extra == "Sale" && v.main_id != 12)
+                                                    if (t.extra == "Sale" && v.main_id != 12 || t.net_weight ==null)
                                                     {
                                                         continue;
                                                     }
@@ -264,10 +264,12 @@
                                                                 </td>*@
 
 
-                                                                <td><a onclick="DeleteFunction(@t.Id,@ViewBag.search)">Delete</a></td>
+                                                                <td><a href="javascript:;" onclick="DeleteFunctionCall(@t.Id);">Delete</a></td>
 
+                                                                
 
                                                             </tr>
+                                              
                                                         }
                                                     }
                                                 }
@@ -275,14 +277,17 @@
                                         </tbody>
 
                                     </table>
+                                    <input type="hidden" id="searchingValue" value="@ViewBag.search" />
+                                    <input type="hidden" id="dateStart" value="@ViewBag.start" />
+                                    <input type="hidden" id="dateEnd" value="@ViewBag.end" />
                                     @{
                                         totalCreditCommas = (String.Format("{0:0,0}", totalCredit));
                                         totaldebitCommas = (String.Format("{0:0,0}", totalDebit));
                                         totalBalanceCommas = (String.Format("{0:0,0}", totalBalance));
                                     }
                                     @*<p><strong>Total Balance:&nbsp;&nbsp;</strong>@totalBalanceCommas</p>*@
-                                    <p><strong>Total Debit:&nbsp;&nbsp;&nbsp;</strong>@totalCreditCommas</p>
-                                    <p><strong>Total Credit:&nbsp;&nbsp;&nbsp;</strong>@totaldebitCommas</p>
+                                    <p><strong>Total Credit:&nbsp;&nbsp;&nbsp;</strong>@totalCreditCommas</p>
+                                    <p><strong>Total Debit:&nbsp;&nbsp;&nbsp;</strong>@totaldebitCommas</p>
 
                                 </div>
                             </div>
@@ -365,18 +370,24 @@
      
 
 
-        function  DeleteFunction(id,search) {
-
-            var url = "/SaleVoucher/AjaxCall/";
+        function  DeleteFunctionCall(id,name) {
+           
+           
+            var search = document.getElementById('searchingValue');
+            var strt = document.getElementById('dateStart').value;
+            var end = document.getElementById('dateEnd').value;
+            var name = search.value;
+           
+            var url = "/Stock/Delete/";
             var vendorslist = "#VendorsDD";
 
             $.ajax({
                 url: url,
-                data: { ID:id,SEARCH:search },
+                data: { ID:id,SEARCH:name,START:strt,END:end},
                 cache: false,
-                type: "POST",
+                type: "GET",
                 success: function (data) {
-                    $("#VendorsDD").html(data);
+                    location.reload();
                 },
                 error: function (reponse) {
                     alert("error : " + reponse);
