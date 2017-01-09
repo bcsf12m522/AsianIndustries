@@ -169,9 +169,8 @@
                                                 <th>Description </th>
                                                 <th>Dr </th>
                                                 <th>Cr </th>
-
                                                 <th>Weight(KG) </th>
-                                                
+                                                <th>Action</th>
 
                                             </tr>
                                         </thead>
@@ -180,7 +179,7 @@
 
                                             @foreach (var v in Model.OrderBy(x => x.id))
                                             {
-                                                foreach (var t in v.Transactions.OrderBy(x => x.created_at).ToList())
+                                                foreach (var t in v.Transactions.Where(x=>x.is_active=="Y").OrderBy(x => x.created_at).ToList())
                                                 {
                                                     result1 = DateTime.Compare(ViewBag.start, t.created_at);
                                                     result2 = DateTime.Compare(ViewBag.end, t.created_at);
@@ -265,7 +264,7 @@
                                                                 </td>*@
 
 
-
+                                                                <td><a onclick="DeleteFunction(@t.Id,@ViewBag.search)">Delete</a></td>
 
 
                                                             </tr>
@@ -361,7 +360,32 @@
 
 
 
+    <script>
 
+     
+
+
+        function  DeleteFunction(id,search) {
+
+            var url = "/SaleVoucher/AjaxCall/";
+            var vendorslist = "#VendorsDD";
+
+            $.ajax({
+                url: url,
+                data: { ID:id,SEARCH:search },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    $("#VendorsDD").html(data);
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+        }
+
+
+    </script>
 
 
 
