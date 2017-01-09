@@ -211,15 +211,21 @@
                                                                 {
                                                                     <td>0</td>
                                                                     <td>@t.net_weight</td>
-                                                                    totalCredit =(int)(totalCredit + t.net_weight);
+                                                                    totalCredit = (int)(totalCredit + t.net_weight);
 
 
+                                                                }
+                                                                else if (t.voucher_type == "PRV" && t.Id % 2 == 1)
+                                                                {
+                                                                    <td>0</td>
+                                                                    <td>@t.net_weight</td>
+                                                                    totalCredit = (int)(totalCredit + t.net_weight);
                                                                 }
                                                                 else
                                                                 {
                                                                     <td>@t.net_weight</td>
                                                                     <td>0</td>
-                                                                    totalDebit =(int)(totalDebit + t.net_weight);
+                                                                    totalDebit = (int)(totalDebit + t.net_weight);
                                                                 }
                                                                
 
