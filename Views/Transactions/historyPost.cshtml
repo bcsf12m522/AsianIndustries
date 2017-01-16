@@ -113,7 +113,7 @@
                     <div class="row">
                         <div class="x_content">
                             <br />
-                            <form id="demo-form2" action="@Url.Action("historyPost","Transactions")" method="post" data-parsley-validate class="form-horizontal form-label-left">
+                            <form id="demo-form2" action="@Url.Action("historyPost","Transactions")" method="get" data-parsley-validate class="form-horizontal form-label-left">
 
                                 <div class="form-group">
 
@@ -180,7 +180,7 @@
                                             </tr>
                                         </thead>
 
-                                        <tbody>
+                                        <tbody id="loadedID">
 
                                             @foreach (var v in Model.OrderBy(x=>x.id))
                                             {
@@ -252,6 +252,7 @@
                                                                         { 
                                                                         <a href="@Url.Action("Edit","Transactions" , new {id= @t.Id} )">Edit</a>
                                                                         <a href="@Url.Action("Detail","Transactions" , new {id= @t.Id} )">Detail</a>
+                                                                        <a href="javascript:;" onclick="DeleteFunctionCall(@t.Id);">Delete</a>
                                                                         }  
                                                                             </td>
                                                     
@@ -267,6 +268,9 @@
                                         </tbody>
 
                                     </table>
+                                    <input type="hidden" id="searchingValue" value="@ViewBag.search" />
+                                    <input type="hidden" id="dateStart" value="@ViewBag.start" />
+                                    <input type="hidden" id="dateEnd" value="@ViewBag.end" />
                                     @{
                                         totalCreditCommas  = (String.Format("{0:0,0}", totalCredit));
                                         totaldebitCommas   = (String.Format("{0:0,0}", totalDebit));
@@ -349,6 +353,55 @@
 
         setInputDate("#dateDefault2");
     </script>
+
+
+    <script>
+
+
+
+
+    function DeleteFunctionCall(id, name) {
+
+        $("body").css("cursor", "progress");
+        var search = document.getElementById('searchingValue');
+        var strt = document.getElementById('dateStart').value;
+        var end = document.getElementById('dateEnd').value;
+        var name = search.value;
+
+        var url = "/Transactions/Delete/";
+        var vendorslist = "#VendorsDD";
+
+        $.ajax({
+            url: url,
+            data: { ID: id, SEARCH: name, START: strt, END: end },
+            cache: false,
+            type: "GET",
+            success: function (data) {
+                location.reload;
+                //alert("ok")
+                //$('#loadedID').load();
+              
+                $("body").css("cursor", "default");
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+
+        });
+
+      
+    }
+
+
+    </script>
+
+
+
+
+
+
+
+
 
 
 
