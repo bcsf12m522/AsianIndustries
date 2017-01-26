@@ -259,10 +259,12 @@
                                                                     <td>
                                                                         @if (t.description != "WHT" && allReportsEdit == 1)
                                                                         {
-                                                                            <a href="@Url.Action("Edit","Transactions" , new {id= @t.Id} )">Edit</a>
-                                                                            <a href="@Url.Action("Detail","Transactions" , new {id= @t.Id} )">Detail</a>
-                                                                            <a href="javascript:;" onclick="DeleteFunctionCall(@t.Id);">Delete</a>
+                                                                           
 
+                                                                                <a href="~/Transactions/Edit/@t.Id">Edit</a>
+                                                                                <a href="~/Transactions/Detail/@t.Id">Detail</a>
+                                                                                <a href="javascript:;" onclick="DeleteFunctionCall(@t.Id);">Delete</a>
+                                                                            
 
 
                                                                         }
@@ -291,16 +293,19 @@
                                         <input type="hidden" name="search" id="searchingValue" value="@ViewBag.search" />
                                         <input type="hidden" name="dateStart" id="dateStart" value="@ViewBag.start" />
                                         <input type="hidden" name="dateEnd" id="dateEnd" value="@ViewBag.end" />
-                                        @*<input type="submit" id="" value="" />*@
+                                     
                                         @{
                                             totalCreditCommas = (String.Format("{0:0,0}", totalCredit));
                                             totaldebitCommas = (String.Format("{0:0,0}", totalDebit));
                                             totalBalanceCommas = (String.Format("{0:0,0}", totalBalance));
                                         }
-                                        @*<p><strong>Total Balance:&nbsp;&nbsp;</strong>@totalBalanceCommas</p>*@
+                                       
                                         <p><strong>Total Debit:&nbsp;&nbsp;&nbsp;</strong>@totalCreditCommas</p>
                                         <p><strong>Total Credit:&nbsp;&nbsp;&nbsp;</strong>@totaldebitCommas</p>
-                                        @*<p><strong>Total Count:&nbsp;&nbsp;&nbsp;</strong>@count</p>*@
+                                       
+                                        <p>
+                                            <a target="_blank" href="" onclick=" printingsomething();"><strong>PRINT</strong></a>
+                                        </p>
 
                                     </div>
                                 </form>
@@ -321,6 +326,7 @@
         </div>
 
     </div>
+    
     <script src="~/Scripts/js/bootstrap.min.js"></script>
 
     <script src="~/Scripts/js/custom.js"></script>
@@ -415,6 +421,13 @@
         });
 
       
+    }
+
+    function printingsomething()
+    {
+   
+        //document.getElementById("notShow").style.display = "none";
+        window.print();
     }
 
 
